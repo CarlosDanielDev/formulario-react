@@ -18,7 +18,7 @@ const initialData = {
 function App() {
   const formRef = useRef(null);
 
-  function handleSubmit(data) {
+  function handleSubmit(data, { reset }) {
     if (data.user.name === "") {
       formRef.current.setErrors({
         user: {
@@ -30,6 +30,7 @@ function App() {
         }
       });
     }
+    reset();
     // console.log(data); // funções do formulário usando useRef
   }
 
