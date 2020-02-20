@@ -17,6 +17,9 @@ const initialData = {
 
 function App() {
   function handleSubmit(data) {
+    if (data.name === "") {
+      alert("nome vazio");
+    }
     console.log(data);
   }
   return (
