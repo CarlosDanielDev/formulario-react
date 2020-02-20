@@ -20,7 +20,15 @@ function App() {
 
   function handleSubmit(data) {
     if (data.user.name === "") {
-      formRef.current.setFieldError("user.name", "O nome é obrigatório");
+      formRef.current.setErrors({
+        user: {
+          name: "O nome é obrigatório",
+          email: "O Email é obrigatório"
+        },
+        address: {
+          city: "A cidade é obrigatório"
+        }
+      });
     }
     // console.log(data); // funções do formulário usando useRef
   }
