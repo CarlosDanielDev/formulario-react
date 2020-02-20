@@ -6,7 +6,7 @@ import "./App.css";
 
 const initialData = {
   user: {
-    name: "Carlos Daniel",
+    // name: "Carlos Daniel",
     email: "daniel@suldopara.com.br",
     pass: "123abcd"
   },
@@ -17,12 +17,14 @@ const initialData = {
 
 function App() {
   const formRef = useRef(null);
+
   function handleSubmit(data) {
-    if (data.name === "") {
-      alert("nome vazio");
+    if (data.user.name === "") {
+      formRef.current.setFieldError("user.name", "O nome é obrigatório");
     }
-    console.log(formRef.current); // funções do formulário usando useRef
+    // console.log(data); // funções do formulário usando useRef
   }
+
   return (
     <div className="App">
       <h1>Form</h1>
@@ -37,7 +39,6 @@ function App() {
           <Input name="number" /> <br />
           <Input name="city" /> <br />
         </Scope>
-
         <button type="submit">Submit</button>
       </Form>
     </div>
