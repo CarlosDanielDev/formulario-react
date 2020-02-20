@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Form } from "@unform/web";
 import { Scope } from "@unform/core";
 import Input from "./components/Form/Input.js";
@@ -16,16 +16,17 @@ const initialData = {
 };
 
 function App() {
+  const formRef = useRef(null);
   function handleSubmit(data) {
     if (data.name === "") {
       alert("nome vazio");
     }
-    console.log(data);
+    console.log(formRef.current); // funções do formulário usando useRef
   }
   return (
     <div className="App">
       <h1>Form</h1>
-      <Form initialData={initialData} onSubmit={handleSubmit}>
+      <Form ref={formRef} initialData={initialData} onSubmit={handleSubmit}>
         <Scope path="user">
           <Input name="name" /> <br />
           <Input type="email" name="email" /> <br />
