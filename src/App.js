@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Form } from "@unform/web";
 import { Scope } from "@unform/core";
+import * as Yup from "yup";
 import Input from "./components/Form/Input.js";
 import "./App.css";
 
@@ -18,19 +19,36 @@ const initialData = {
 function App() {
   const formRef = useRef(null);
 
-  function handleSubmit(data, { reset }) {
-    if (data.user.name === "") {
-      formRef.current.setErrors({
-        user: {
-          name: "O nome é obrigatório",
-          email: "O Email é obrigatório"
-        },
-        address: {
-          city: "A cidade é obrigatório"
-        }
+  async function handleSubmit(data, { reset }) {
+    try {
+      const schema = Yup.object().shape({
+        user: Yup.object().shape({
+          name: Yup.string().required("é obrigátorio"),
+          email: Yup.string()
+            .email("digite um email válido")
+            .required("é obrigatório")
+        }),
+        address: Yup.object().shape({
+          city: Yup.string()
+            .min(3, "minimo de 3 caracteres")
+            .required("é obrigatório")
+        })
       });
+
+      await schema.validate(data, { abortEarly: false });
+      formRef.current.setErrors({});
+      reset();
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errorMessages = {};
+
+        err.inner.forEach(error => {
+          errorMessages[error.path] = error.message;
+        });
+
+        formRef.current.setErrors(errorMessages);
+      }
     }
-    reset();
     // console.log(data); // funções do formulário usando useRef
   }
 
