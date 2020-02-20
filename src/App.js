@@ -5,9 +5,14 @@ import Input from "./components/Form/Input.js";
 import "./App.css";
 
 const initialData = {
-  name: "Carlos Daniel",
-  email: "daniel@suldopara.com.br",
-  pass: "123abcd"
+  user: {
+    name: "Carlos Daniel",
+    email: "daniel@suldopara.com.br",
+    pass: "123abcd"
+  },
+  address: {
+    city: "Redenção"
+  }
 };
 
 function App() {
