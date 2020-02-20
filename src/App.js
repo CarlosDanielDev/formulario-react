@@ -1,20 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Form } from "@unform/web";
 import { Scope } from "@unform/core";
 import * as Yup from "yup";
 import Input from "./components/Form/Input.js";
 import "./App.css";
-
-const initialData = {
-  user: {
-    // name: "Carlos Daniel",
-    email: "daniel@suldopara.com.br",
-    pass: "123abcd"
-  },
-  address: {
-    city: "Redenção"
-  }
-};
 
 function App() {
   const formRef = useRef(null);
@@ -52,10 +41,21 @@ function App() {
     // console.log(data); // funções do formulário usando useRef
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      formRef.current.setData({
+        user: {
+          name: "Carlos Daniel",
+          email: "danphp7@gmail.com"
+        }
+      });
+    }, 2000);
+  }, []);
+
   return (
     <div className="App">
       <h1>Form</h1>
-      <Form ref={formRef} initialData={initialData} onSubmit={handleSubmit}>
+      <Form ref={formRef} onSubmit={handleSubmit}>
         <Scope path="user">
           <Input name="name" /> <br />
           <Input type="email" name="email" /> <br />
