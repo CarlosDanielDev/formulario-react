@@ -1,5 +1,6 @@
 import React from "react";
 import { Form } from "@unform/web";
+import { Scope } from "@unform/core";
 import Input from "./components/Form/Input.js";
 import "./App.css";
 
@@ -17,12 +18,17 @@ function App() {
     <div className="App">
       <h1>Form</h1>
       <Form initialData={initialData} onSubmit={handleSubmit}>
-        <Input name="user.name" /> <br />
-        <Input type="email" name="user.email" /> <br />
-        <Input type="password" name="user.pass" /> <br />
-        <Input name="address.street" /> <br />
-        <Input name="address.number" /> <br />
-        <Input name="address.city" /> <br />
+        <Scope path="user">
+          <Input name="name" /> <br />
+          <Input type="email" name="email" /> <br />
+          <Input type="password" name="pass" /> <br />
+        </Scope>
+        <Scope path="address">
+          <Input name="street" /> <br />
+          <Input name="number" /> <br />
+          <Input name="city" /> <br />
+        </Scope>
+
         <button type="submit">Submit</button>
       </Form>
     </div>
