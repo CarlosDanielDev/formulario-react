@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Form } from "@unform/web";
+import Input from "./components/Form/Input.js";
+import "./App.css";
 
 function App() {
+  function handleSubmit(data) {
+    console.log(data);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Form</h1>
+      <Form onSubmit={handleSubmit}>
+        <Input name="name" />
+        <Input type="email" name="email" />
+        <Input type="password" name="pass" />
+
+        <button type="submit">Submit</button>
+      </Form>
     </div>
   );
 }
